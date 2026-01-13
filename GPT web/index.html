@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head><meta charset="UTF-8"><title>Shop</title></head>
+<link rel="stylesheet" href="css/style.css">
+<body>
+<nav>
+  <a href="cart.html">🛒 <span id="cartCount">0</span></a>
+</nav>
+
+<h2>Termékek</h2>
+<div id="shop"></div>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+const shop = document.getElementById("shop");
+if(products.length===0) shop.innerHTML="Nincs termék. Add hozzá adminból.";
+products.forEach(p=>{
+  shop.innerHTML += `
+    <div>
+      <b>${p.name}</b> – ${p.price} Ft
+      <input id="q${p.id}" type="number" value="1" min="1">
+      <button onclick="addToCart(${p.id}, Number(q${p.id}.value))">Kosárba</button>
+    </div>`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head><meta charset="UTF-8"><title>Checkout</title></head>
+<body>
+<nav>
+  <a href="index.html">Bolt</a> |
+  <a href="cart.html">Kosár</a> |
+  🛒 <span id="cartCount">0</span>
+</nav>
+
+<h3>Rendelés</h3>
+<div id="order"></div>
+<h4>Összesen: <span id="sum">0</span> Ft</h4>
+<button onclick="placeOrder()">Fizetés</button>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script>
+function render(){
+  const c = JSON.parse(localStorage.getItem("cart")||"{}");
+  let t=0, html="";
+  Object.keys(c).forEach(id=>{
+    const p = products.find(x=>String(x.id)===String(id));
+    const s = p.price * c[id]; t+=s;
+    html += `${p.name} × ${c[id]} = ${s} Ft<br>`;
+  });
+  order.innerHTML = html; sum.innerText=t;
+}
+function placeOrder(){
+  const c = JSON.parse(localStorage.getItem("cart")||"{}");
+  const orders = JSON.parse(localStorage.getItem("orders")||"[]");
+  let items=[], total=0;
+  Object.keys(c).forEach(id=>{
+    const p = products.find(x=>String(x.id)===String(id));
+    items.push({name:p.name, price:p.price, qty:c[id]});
+    total+=p.price*c[id];
+  });
+  orders.push({date:new Date().toLocaleString(), items, total});
+  localStorage.setItem("orders", JSON.stringify(orders));
+  localStorage.removeItem("cart");
+  alert("Kész!");
+  location="index.html";
+}
+render();
+</script>
+</body>
+</html>

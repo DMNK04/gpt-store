@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head><meta charset="UTF-8"><title>Admin</title></head>
+<body>
+<h3>Admin</h3>
+<input id="pw" type="password" placeholder="jelszó">
+<button onclick="login()">Belépés</button>
+
+<div id="panel" style="display:none;">
+  <h4>Új termék</h4>
+  <input id="name" placeholder="Név">
+  <input id="price" type="number" placeholder="Ár">
+  <button onclick="add()">Hozzáadás</button>
+
+  <h4>Termékek</h4>
+  <div id="plist"></div>
+
+  <h4>Rendelések</h4>
+  <div id="olist"></div>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
